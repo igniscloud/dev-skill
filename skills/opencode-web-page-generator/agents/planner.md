@@ -60,6 +60,7 @@ Your job:
 - decide the page output language and record it in `product_spec.md`
 - fix the frontend stack to Vue and record it in the plan artifacts
 - fold blocking findings into the next sprint plan
+- generate `test_plan.md` for evaluator.
 
 Language rule:
 

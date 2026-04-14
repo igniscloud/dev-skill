@@ -123,3 +123,4 @@ Stop only when:
 - `qa_report.md` has no unresolved blocking findings
 - the current sprint `Done Means` is satisfied
 - `handoff.md` is sufficient for continuation or closeout
+- 如果你是codex，全部是使用gpt5.4 high.

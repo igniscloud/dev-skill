@@ -12,6 +12,8 @@ description: Multi-agent web development workflow. Use when a web app should be 
 - 这个 workflow 必须使用子 agent。
 - `prd`、`frontend-design`、`code-dev`、`review` 这 4 个工作都必须通过子 agent 完成。
 - 父 agent 只负责分阶段编排、传递工件、检查阶段结果是否满足进入下一阶段，不直接代写 PRD、不直接代写设计、不直接代写主要代码、不直接代做最终 review。
+- 全部子agent使用gpt5.4，不能使用gpt5.4-mini。
+- wait_agent的timeout_ms设置为30分钟。
 
 ## 必须使用的 skills
 
@@ -81,7 +83,6 @@ description: Multi-agent web development workflow. Use when a web app should be 
   - `Pinia`
   - `vue-i18n`
   - `Tailwind CSS v4`
-  - `Vite SSR entry + prerender script`
 - 后端和部署默认走 `ignis` 的发布链路，不把本地 `dev` 当主发布模型
 - 遇到登录需求时，登录链路按 `ignis-login` 约束实现，不自行发明另一套认证模型
 - 后端 API、`ignis.hcl`、SDK 用法、部署命令都要以 `ignis` / `ignis-login` 的文档为准，不要猜
@@ -127,6 +128,7 @@ description: Multi-agent web development workflow. Use when a web app should be 
 - 原始需求
 - 平台范围、语言范围、登录要求、后端约束等已知限制
 - 明确要求写入 `.dev/prd_doc.md`
+- 明确要求写入 `.dev/test_plan.md`。
 
 ### Frontend Design Agent 输入
 
@@ -150,6 +152,8 @@ description: Multi-agent web development workflow. Use when a web app should be 
 - `.dev/frontend_design_doc.md`
 - 当前代码和构建 / 部署结果
 - 明确要求写入 `.dev/review_report.md`
+- 必须读取并且完成`test_plan.md`中的全部测试。
+- 必须要测试部署后的网站，必须要截图测试。
 
 ## 停止条件
 

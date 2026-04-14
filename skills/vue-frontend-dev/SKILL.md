@@ -1,6 +1,6 @@
 ---
 name: vue-frontend-dev
-description: Use for implementing or repairing the Vue frontend of a web app with Vue 3, Vite, vue-router, Pinia, vue-i18n, Tailwind CSS v4, and Vite SSR entry plus prerender script.
+description: Use for implementing or repairing the Vue frontend of a web app with Vue 3, Vite, vue-router, Pinia, vue-i18n, Tailwind CSS v4.
 ---
 
 # Vue Frontend Dev
@@ -15,7 +15,6 @@ description: Use for implementing or repairing the Vue frontend of a web app wit
 - 使用 `Pinia` 管理前端状态
 - 使用 `vue-i18n` 组织多语言文案
 - 使用 `Tailwind CSS v4` 构建设计系统与页面样式
-- 使用 `Vite SSR entry + prerender script` 处理 SSR 入口与静态预渲染
 
 不适用范围：
 
@@ -42,14 +41,12 @@ description: Use for implementing or repairing the Vue frontend of a web app wit
 - `Pinia`
 - `vue-i18n`
 - `Tailwind CSS v4`
-- `Vite SSR entry + prerender script`
 
 ## 工作流程
 
 1. 先读取 `.dev/prd_doc.md`，确认页面范围、用户流程、语言和平台约束。
 2. 再读取 `.dev/frontend_design_doc.md`，把设计说明转为实际页面结构、组件层级和样式实现。
 3. 盘点当前仓库已有前端结构，优先延续已有目录、命名和工程约定。
-4. 补齐路由、状态、国际化、样式和 SSR / prerender 入口。
 5. 与后端实际能力对接，不要凭空假设 API 形状；不明确时从现有代码或已生成服务中确认。
 6. 构建并验证前端可运行，必要时修复构建或路由问题。
 
@@ -63,7 +60,6 @@ description: Use for implementing or repairing the Vue frontend of a web app wit
 - 页面导航和受保护路由统一通过 `vue-router` 组织。
 - 前端共享状态统一通过 `Pinia` 管理，不要到处堆局部全局变量。
 - 样式统一使用 `Tailwind CSS v4`；避免内联样式和分散的临时视觉规则。
-- SSR 入口与 prerender 脚本要保持一致的路由认知，不要让构建产物和运行时页面不一致。
 - 如果需求包含登录态、用户资料或会话信息，前端以真实登录流为准，不自行发明另一套认证入口。
 
 ## 实现重点
@@ -90,16 +86,9 @@ description: Use for implementing or repairing the Vue frontend of a web app wit
 - 优先建立页面壳层、内容区、关键卡片和交互控件的稳定视觉规则。
 - 不要把页面做成通用后台模板观感，除非需求本身就是后台系统。
 
-### SSR 与预渲染
-
-- 明确 SSR 入口文件和 prerender 脚本职责。
-- 对营销页、落地页、公开说明页等适合静态输出的路由使用 prerender。
-- 对明显依赖用户态或实时数据的页面，不要错误地当作静态内容处理。
-
 ## 质量标准
 
 - 页面、路由、状态和样式实现与 `.dev/prd_doc.md`、`.dev/frontend_design_doc.md` 一致
 - 前端技术栈符合本 skill 的基线或仓库既有约束
 - 文案组织清晰，可见文本没有无序散落
-- 路由、SSR 和 prerender 没有明显冲突
 - 至少完成一次构建或等价验证；如果无法验证，需要明确指出阻塞点
