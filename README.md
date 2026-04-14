@@ -1,72 +1,55 @@
-# OpenCode Web Page Generator
+# Web Fullstack Workflow Skills
 
-`opencode-web-page-generator` is an OpenCode skill for orchestrating web-page work. It acts as a manager and continuously routes work across three roles instead of doing planning, implementation, or review directly.
-
-- `planner`: creates or refreshes `product_spec.md` and `sprint_contract.md`
-- `builder`: implements the current sprint and refreshes `handoff.md`
-- `evaluator`: independently reviews the result and refreshes `qa_report.md`
-
-The workflow is artifact-driven. Shared files carry the state forward across multiple subagent rounds so the work can continue cleanly even when a session needs to reset.
-
-## Project Structure
-
-- `SKILL.md`: manager entry point and routing rules
-- `agents/planner.md`: planner subagent instructions
-- `agents/builder.md`: builder subagent instructions
-- `agents/evaluator.md`: evaluator subagent instructions
-- `references/*.md`: templates and manager references
-
-## Shared Artifacts
-
-The workflow revolves around these files:
-
-- `product_spec.md`
-- `sprint_contract.md`
-- `handoff.md`
-- `qa_report.md`
-- `design-system/MASTER.md`
-- `design-system/pages/*.md`
+`web-fullstack-workflow` is a skill collection for building and shipping fullstack web apps with structured product work, frontend design, Vue implementation, and Ignis backend/deploy workflows.
 
 ## Installation
 
-Copy this directory into your local OpenCode skills directory:
+Install all skills from this repository with `npx skills add`:
 
 ```bash
-mkdir -p ~/.agents/skills
-cp -R . ~/.agents/skills/opencode-web-page-generator
+npx skills add https://github.com/igniscloud/web-fullstack-workflow.git
 ```
 
-If the task also uses the optional `ignis` or `ignis-login` skills, make sure they are installed at:
+If your environment prefers SSH, replace the repository URL accordingly.
 
-- `~/.agents/skills/ignis`
-- `~/.agents/skills/ignis-login`
+## Included Skills
 
-## How To Use
+- `web-dev-workflow`: Orchestrates a full multi-agent delivery workflow for PRD, frontend design, development, and review.
+- `prd-analysis`: Converts feature requests or raw requirements into a concise product-facing PRD.
+- `frontend-design-spec`: Turns a requirements document into a text-only frontend design spec that developers can implement directly.
+- `vue-frontend-dev`: Implements or repairs a Vue 3 + Vite frontend with vue-router, Pinia, vue-i18n, and Tailwind CSS v4.
+- `ignis`: Covers Ignis project setup, `ignis-cli`, `ignis-sdk`, `ignis.hcl`, SQLite, and build/publish/deploy workflows.
+- `ignis-login`: Covers Ignis login integration with Hosted Login, PKCE, callback flows, and login smoke tests.
+- `opencode-web-page-generator`: Runs an artifact-driven OpenCode manager workflow across planner, builder, and evaluator roles.
 
-Invoke this skill as the manager for a web-page task. A typical cycle looks like this:
+## Repository Layout
 
-1. The manager reads `agents/*.md` and checks the current artifact state.
-2. If planning artifacts are missing or stale, it dispatches `planner`.
-3. When the sprint is clear, it dispatches `builder`.
-4. After implementation, it dispatches `evaluator`.
-5. If `qa_report.md` still has blocking findings, the manager continues the next round.
+```text
+.
+├── LICENSE
+├── README.md
+└── skills/
+    ├── frontend-design-spec/
+    ├── ignis/
+    ├── ignis-login/
+    ├── opencode-web-page-generator/
+    ├── prd-analysis/
+    ├── vue-frontend-dev/
+    └── web-dev-workflow/
+```
 
-This skill is a good fit when you need:
+## When To Use This Repository
 
-- a fresh landing page or product page built from a brief
-- iterative improvement of an existing page
-- explicit handoff between planning, implementation, and review
-- safe continuation via `handoff.md` when context gets crowded
+This repository is a good fit when you want:
 
-## Ignis References
+- a packaged set of reusable skills instead of one standalone skill
+- a full web delivery workflow from requirements to review
+- Vue frontend implementation with a matching frontend design workflow
+- Ignis backend, login, and deployment skills in the same package
+- an OpenCode-oriented page workflow alongside Codex-style development skills
 
-The optional `ignis` and `ignis-login` skills in this project are intended to align with the official Ignis repository:
+## Notes
 
-- https://github.com/igniscloud/ignis
-
-## Conventions
-
-- The manager does not replace the planner, builder, or evaluator roles.
-- Reuse the shared artifacts instead of inventing parallel documents.
-- Read external skills and references progressively instead of preloading everything.
-- When the runtime needs an explicit local skill path, use `~/.agents/skills/...`.
+- `web-dev-workflow` is the top-level workflow skill when you want the full staged delivery path.
+- `ignis` and `ignis-login` can also be used independently in non-Vue or non-design-heavy projects.
+- `opencode-web-page-generator` is OpenCode-specific and is separate from the general multi-agent web workflow.
