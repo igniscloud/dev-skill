@@ -1,5 +1,7 @@
 # Web Fullstack Workflow Skills
 
+[中文](./README.zh-CN.md) | English
+
 `web-fullstack-workflow` is a skill collection for building and shipping fullstack web apps with structured product work, frontend design, Vue implementation, and Ignis backend/deploy workflows.
 
 ## Installation
