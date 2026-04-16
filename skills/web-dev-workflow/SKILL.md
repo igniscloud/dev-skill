@@ -12,8 +12,8 @@ description: Multi-agent web development workflow. Use when a web app should be 
 - 这个 workflow 必须使用子 agent。
 - `prd`、`frontend-design`、`code-dev`、`review` 这 4 个工作都必须通过子 agent 完成。
 - 父 agent 只负责分阶段编排、传递工件、检查阶段结果是否满足进入下一阶段，不直接代写 PRD、不直接代写设计、不直接代写主要代码、不直接代做最终 review。
-- 全部子agent使用gpt5.4，不能使用gpt5.4-mini。
-- wait_agent的timeout_ms设置为30分钟。
+- 全部子agent使用gpt5.4-high，不能使用gpt5.4-mini。
+- 无限等待子agent，不能主动中断子agent的执行。
 
 ## 必须使用的 skills
 
